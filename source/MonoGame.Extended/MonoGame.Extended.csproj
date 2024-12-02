@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <RollForward>Major</RollForward>
         <PublishReadyToRun>false</PublishReadyToRun>
         <TieredCompilation>false</TieredCompilation>
@@ -41,7 +41,11 @@
         </AssemblyAttribute>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Update="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+      <PackageReference Include="MessagePack" Version="2.5.192" />
+      <PackageReference Include="MessagePack.Annotations" Version="2.5.192" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Update="MonoGame.Framework.DesktopGL" Version="3.8.2.1105" />
     </ItemGroup>
 
 </Project>
