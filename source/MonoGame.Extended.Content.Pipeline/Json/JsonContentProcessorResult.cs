@@ -1,8 +1,7 @@
-﻿namespace MonoGame.Extended.Content.Pipeline.Json
+﻿namespace MonoGame.Extended.Content.Pipeline.Json;
+
+public class JsonContentProcessorResult
 {
-    public class JsonContentProcessorResult
-    {
-        public string ContentType { get; set; }
-        public string Json { get; set; }
-    }
+    public string ContentType { get; set; }
+    public string Json { get; set; }
 }

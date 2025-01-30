@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Animations;
@@ -81,7 +82,7 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// <param name="texture">The texture to create the atlas from.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="texture"/> is null.</exception>
     /// <exception cref="ObjectDisposedException">Thrown if <paramref name="texture"/> is disposed.</exception>
-    public Texture2DAtlas(Texture2D texture) : this(null, texture) { }
+    public Texture2DAtlas(Texture2D texture) : this(null!, texture) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Texture2DAtlas"/> class with the specified name and texture.
@@ -167,9 +168,13 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// <exception cref="InvalidOperationException">
     /// Thrown if a region with the same name as the <paramref name="name"/> parameter already exists in this atlas.
     /// </exception>
-    public Texture2DRegion CreateRegion(Rectangle bounds, string name)
+    public Texture2DRegion CreateRegion(Rectangle bounds, string? name)
     {
-        Texture2DRegion region = new Texture2DRegion(Texture, bounds, name);
+        Texture2DRegion region = new Texture2DRegion(Texture, bounds)
+        {
+            Name = name!
+        };
+
         AddRegion(region);
         return region;
     }
@@ -234,7 +239,7 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// <returns>
     /// <see langword="true"/> if the region is found at the specified index; otherwise, <see langword="false"/>.
     /// </returns>
-    public bool TryGetRegion(int index, out Texture2DRegion region)
+    public bool TryGetRegion(int index, [NotNullWhen(true)] out Texture2DRegion? region)
     {
         region = default;
 
@@ -258,7 +263,7 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// <returns>
     /// <see langword="true"/> if the region is found with the specified name; otherwise, <see langword="false"/>.
     /// </returns>
-    public bool TryGetRegion(string name, out Texture2DRegion region) => _regionsByName.TryGetValue(name, out region);
+    public bool TryGetRegion(string name, [MaybeNullWhen(false)] out Texture2DRegion region) => _regionsByName.TryGetValue(name, out region);
 
     /// <summary>
     /// Gets the regions at the specified indexes.
@@ -325,7 +330,7 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// </exception>
     public bool RemoveRegion(int index)
     {
-        if (TryGetRegion(index, out Texture2DRegion region))
+        if (TryGetRegion(index, out var region))
         {
             return RemoveRegion(region);
         }
@@ -342,7 +347,7 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// </returns>
     public bool RemoveRegion(string name)
     {
-        if (TryGetRegion(name, out Texture2DRegion region))
+        if (TryGetRegion(name, out var region))
         {
             return RemoveRegion(region);
         }

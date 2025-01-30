@@ -81,13 +81,11 @@ public static class Texture2DRegionExtensions
     {
         ArgumentNullException.ThrowIfNull(textureRegion);
 
-        if (string.IsNullOrEmpty(name))
-        {
-            name = $"{textureRegion.Texture.Name}({x}, {y}, {width}, {height})";
-        }
-
         Rectangle region = textureRegion.Bounds.GetRelativeRectangle(x, y, width, height);
-        return new Texture2DRegion(textureRegion.Texture, region, name);
+        return new Texture2DRegion(textureRegion.Texture, region)
+        {
+            Name = name
+        };
     }
 
     /// <summary>

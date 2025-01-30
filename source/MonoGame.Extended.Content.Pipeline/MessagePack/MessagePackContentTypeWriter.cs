@@ -2,17 +2,18 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
-namespace MonoGame.Extended.Content.Pipeline.Json;
+namespace MonoGame.Extended.Content.Pipeline.MessagePack;
 
 [ContentTypeWriter]
-public class JsonContentTypeWriter : ContentTypeWriter<JsonContentProcessorResult>
+public class MessagePackContentTypeWriter : ContentTypeWriter<MessagePackContentProcessorResult>
 {
     private string _runtimeType;
 
-    protected override void Write(ContentWriter writer, JsonContentProcessorResult result)
+    protected override void Write(ContentWriter writer, MessagePackContentProcessorResult result)
     {
         _runtimeType = result.ContentType;
-        writer.Write(result.Json);
+        writer.Write(result.Data.Length);
+        writer.Write(result.Data);
     }
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)

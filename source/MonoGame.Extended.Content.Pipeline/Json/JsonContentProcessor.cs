@@ -1,31 +1,31 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net.Mime;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
-namespace MonoGame.Extended.Content.Pipeline.Json
-{
-    [ContentProcessor(DisplayName = "JSON Processor - MonoGame.Extended")]
-    public class JsonContentProcessor : ContentProcessor<ContentImporterResult<string>, JsonContentProcessorResult>
-    {
-        [DefaultValue(typeof(Type), "System.Object")]
-        public string ContentType { get; set; }
+namespace MonoGame.Extended.Content.Pipeline.Json;
 
-        public override JsonContentProcessorResult Process(ContentImporterResult<string> input, ContentProcessorContext context)
+[ContentProcessor(DisplayName = "JSON Processor - MonoGame.Extended")]
+public class JsonContentProcessor : ContentProcessor<ContentImporterResult<string>, JsonContentProcessorResult>
+{
+    [DefaultValue(typeof(Type), "System.Object")]
+    public string ContentType { get; set; }
+
+    public override JsonContentProcessorResult Process(ContentImporterResult<string> input, ContentProcessorContext context)
+    {
+        try
         {
-            try
+            var output = new JsonContentProcessorResult
             {
-                var output = new JsonContentProcessorResult
-                {
-                    ContentType = ContentType,
-                    Json = input.Data
-                };
-                return output;
-            }
-            catch (Exception ex)
-            {
-                context.Logger.LogMessage("Error {0}", ex);
-                throw;
-            }
+                ContentType = ContentType,
+                Json = input.Data
+            };
+            return output;
+        }
+        catch (Exception ex)
+        {
+            context.Logger.LogMessage("Error {0}", ex);
+            throw;
         }
     }
 }
