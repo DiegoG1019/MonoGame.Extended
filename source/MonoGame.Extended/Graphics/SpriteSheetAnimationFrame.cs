@@ -25,9 +25,15 @@ internal class SpriteSheetAnimationFrame : IAnimationFrame
     /// </summary>
     public TimeSpan Duration { get; }
 
-    internal SpriteSheetAnimationFrame(int index, TimeSpan duration)
+    /// <summary>
+    /// A function that takes the current frame index and transforms it -- For special-case use. Warning: Be careful with index overflows!
+    /// </summary>
+    public Func<int, int>? FrameIndexTransformer { get; }
+
+    internal SpriteSheetAnimationFrame(int index, TimeSpan duration, Func<int, int>? frameIndexTransformer)
     {
         FrameIndex = index;
         Duration = duration;
+        FrameIndexTransformer = frameIndexTransformer;
     }
 }

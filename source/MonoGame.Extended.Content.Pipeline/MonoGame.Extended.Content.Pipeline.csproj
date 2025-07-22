@@ -8,6 +8,7 @@
   <PropertyGroup>
     <Description>Content Pipeline importers and processors to make MonoGame more awesome.</Description>
     <PackageTags>monogame content importer processor reader tiled texturepacker bmfont animations</PackageTags>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

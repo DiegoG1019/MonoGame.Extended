@@ -190,7 +190,7 @@ namespace MonoGame.Extended
     ///     Represents the position, rotation, and scale of a two-dimensional game object.
     /// </summary>
     /// <seealso cref="BaseTransform{Matrix3x2D}" />
-    /// <seealso cref="IMovable" />
+    /// <seealso cref="IPositionable" />
     /// <seealso cref="IRotatable" />
     /// <seealso cref="IScalable" />
     /// <remarks>
@@ -200,7 +200,7 @@ namespace MonoGame.Extended
     ///         objects hierarchically.
     ///     </para>
     /// </remarks>
-    public class Transform2 : BaseTransform<Matrix3x2>, IMovable, IRotatable, IScalable
+    public class Transform2 : BaseTransform<Matrix3x2>, IPositionable, IRotatable, IScalable
     {
         private Vector2 _position;
         private float _rotation;

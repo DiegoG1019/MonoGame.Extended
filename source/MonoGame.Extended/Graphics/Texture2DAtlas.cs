@@ -16,21 +16,21 @@ namespace MonoGame.Extended.Graphics;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A texture atlas, also known as a tile map, tile engine, or sprite sheet, is a large image that contains a 
+///         A texture atlas, also known as a tile map, tile engine, or sprite sheet, is a large image that contains a
 ///         collection of sub-images, or "textures", each representing a texture map for a specific part of a 2D or 3D model.
 ///     </para>
 ///     <para>
 ///         These sub-textures can be rendered by adjusting the texture coordinates (UV map) to reference the appropriate
-///         part of the atlas. This technique allows efficient rendering in applications where many small textures are 
+///         part of the atlas. This technique allows efficient rendering in applications where many small textures are
 ///         frequently used.
 ///     </para>
 ///     <para>
-///         By storing textures in a single atlas, the graphics hardware treats them as a single unit, which can save memory 
-///         and improve performance by reducing the number of rendering state changes. Binding one large texture once is 
+///         By storing textures in a single atlas, the graphics hardware treats them as a single unit, which can save memory
+///         and improve performance by reducing the number of rendering state changes. Binding one large texture once is
 ///         typically faster than binding multiple smaller textures individually.
 ///     </para>
 ///     <para>
-///         However, careful alignment is necessary to avoid texture bleeding when using mipmapping, and to prevent artifacts 
+///         However, careful alignment is necessary to avoid texture bleeding when using mipmapping, and to prevent artifacts
 ///         between tiles when using texture compression.
 ///     </para>
 /// </remarks>
@@ -279,13 +279,14 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
 
         return regions;
     }
-    
+
     internal Texture2DRegion[] GetRegions(ReadOnlySpan<IAnimationFrame> frames)
     {
         Texture2DRegion[] regions = new Texture2DRegion[frames.Length];
         for (int i = 0; i < frames.Length; i++)
         {
-            regions[i] = GetRegion(frames[i].FrameIndex);
+            var frame = frames[i];
+            regions[i] = GetRegion(frame.FrameIndexTransformer?.Invoke(frame.FrameIndex) ?? frame.FrameIndex);
         }
 
         return regions;

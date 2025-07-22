@@ -30,10 +30,11 @@ public sealed class SpriteSheetAnimationBuilder
     /// </summary>
     /// <param name="regionIndex">The index of the region in the sprite sheet.</param>
     /// <param name="duration">The duration of the frame.</param>
+    /// <param name="frameIndexTransformer">A special function to transform the index for special cases.</param>
     /// <returns>The <see cref="SpriteSheetAnimationBuilder"/> instance for chaining.</returns>
-    public SpriteSheetAnimationBuilder AddFrame(int regionIndex, TimeSpan duration)
+    public SpriteSheetAnimationBuilder AddFrame(int regionIndex, TimeSpan duration, Func<int, int>? frameIndexTransformer = null)
     {
-        SpriteSheetAnimationFrame frame = new SpriteSheetAnimationFrame(regionIndex, duration);
+        SpriteSheetAnimationFrame frame = new SpriteSheetAnimationFrame(regionIndex, duration, frameIndexTransformer);
         _frames.Add(frame);
         return this;
     }
@@ -43,11 +44,12 @@ public sealed class SpriteSheetAnimationBuilder
     /// </summary>
     /// <param name="regionName">The name of the region in the sprite sheet.</param>
     /// <param name="duration">The duration of the frame.</param>
+    /// <param name="frameIndexTransformer">A special function to transform the index for special cases.</param>
     /// <returns>The <see cref="SpriteSheetAnimationBuilder"/> instance for chaining.</returns>
-    public SpriteSheetAnimationBuilder AddFrame(string regionName, TimeSpan duration)
+    public SpriteSheetAnimationBuilder AddFrame(string regionName, TimeSpan duration, Func<int, int>? frameIndexTransformer = null)
     {
         int index = _spriteSheet.TextureAtlas.GetIndexOfRegion(regionName);
-        return AddFrame(index, duration);
+        return AddFrame(index, duration, frameIndexTransformer);
     }
 
     /// <summary>

@@ -120,7 +120,7 @@ namespace MonoGame.Extended.VectorDraw
                 theta += increment;
             }
 
-            DrawCircle(center, radius, color);            
+            DrawCircle(center, radius, color);
         }
         public void DrawSolidCircle(Vector2 center, float radius, Color color, Color fillcolor)
         {

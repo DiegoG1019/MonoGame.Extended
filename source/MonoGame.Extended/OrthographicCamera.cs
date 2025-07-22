@@ -5,7 +5,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace MonoGame.Extended
 {
-    public sealed class OrthographicCamera : Camera<Vector2>, IMovable, IRotatable
+    public sealed class OrthographicCamera : Camera<Vector2>, IPositionable, IRotatable
     {
         private readonly ViewportAdapter _viewportAdapter;
         private float _maximumZoom = float.MaxValue;

@@ -20,4 +20,9 @@ public interface IAnimationFrame
     /// Gets the total duration this frame should be displayed during an animation.
     /// </summary>
     TimeSpan Duration { get; }
+
+    /// <summary>
+    /// A function that takes the current frame index and transforms it -- For special-case use. Warning: Be careful with index overflows!
+    /// </summary>
+    public Func<int, int>? FrameIndexTransformer { get; }
 }

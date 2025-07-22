@@ -6,11 +6,11 @@ using System.Reflection;
 namespace MonoGame.Extended.Tweening
 {
     public sealed class TweenFieldMember<T> : TweenMember<T>
-        where T : struct 
+        where T : struct
     {
         private readonly FieldInfo _fieldInfo;
 
-        public TweenFieldMember(object target, FieldInfo fieldInfo) 
+        public TweenFieldMember(object target, FieldInfo fieldInfo)
             : base(target, CompileGetMethod(fieldInfo), CompileSetMethod(fieldInfo))
         {
             _fieldInfo = fieldInfo;

@@ -51,7 +51,14 @@ public class AnimationController : IAnimationController
     public TimeSpan CurrentFrameTimeRemaining { get; private set; }
 
     /// <inheritdoc />
-    public int CurrentFrame => _definition.Frames[_internalFrame].FrameIndex;
+    public int CurrentFrame
+    {
+        get
+        {
+            var frame = _definition.Frames[_internalFrame];
+            return frame.FrameIndexTransformer?.Invoke(frame.FrameIndex) ?? frame.FrameIndex;
+        }
+    }
 
     /// <inheritdoc />
     public int FrameCount => _definition.FrameCount;
