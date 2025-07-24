@@ -57,7 +57,6 @@ public class SpriteSheet
     /// <returns>A new <see cref="Sprite"/> instance.</returns>
     public Sprite CreateSprite(string regionName) => TextureAtlas.CreateSprite(regionName);
 
-
     /// <summary>
     /// Defines a new animation for the sprite sheet.
     /// </summary>
