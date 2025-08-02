@@ -4,6 +4,7 @@
         <Description>It makes MonoGame more awesome.</Description>
         <PackageTags>monogame extended pipeline bmfont tiled texture atlas input viewport fps shapes sprite</PackageTags>
         <Nullable>enable</Nullable>
+        <NoWarn>CS1591</NoWarn>
     </PropertyGroup>
 
     <!-- Remove the following dependency files from view in the Solution Explorer panel -->
