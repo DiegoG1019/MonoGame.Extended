@@ -50,6 +50,7 @@ namespace MonoGame.Extended.Tweening
 
             activeTween?.Cancel();
 
+            // TODO: Use static abstract methods to factory
             AllocationCount++;
             var tween = (TTween)Activator.CreateInstance(typeof(TTween),
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null,

@@ -37,6 +37,11 @@ namespace MonoGame.Extended
         // ReSharper disable CompareOfFloatsByEqualityOperator
         public bool IsEmpty => (Width == 0) && (Height == 0);
 
+        /// <summary>
+        /// Gets the <see cref="Vector2" /> representing the center of this <see cref="Size" />.
+        /// </summary>
+        public Vector2 Center => new Vector2(Width * 0.5f, Height * 0.5f);
+
         // ReSharper restore CompareOfFloatsByEqualityOperator
 
         /// <summary>
